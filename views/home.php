@@ -1,6 +1,4 @@
 <?php
-$basePath = '';
-$pageTitle = 'Home';
 require_once __DIR__ . '/layouts/header.php';
 ?>
 

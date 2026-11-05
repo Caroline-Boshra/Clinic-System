@@ -1,6 +1,7 @@
 <?php
 
 use App\Database;
+use App\Controller\AdminConroller;
 use App\Controller\AuthController;
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -27,6 +28,7 @@ switch ($page) {
         break;
 
     case 'majors':
+        $majors = (new AdminConroller($pdo))->getMajors();
         require __DIR__ . '/views/majors.php';
         break;
 
@@ -43,8 +45,13 @@ switch ($page) {
         break;
 
     case 'add-major':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            (new AdminConroller($pdo))->addMajor();
+            exit;
+        }
         require __DIR__ . '/views/admin/add-major.php';
         break;
+  
 
     case 'login':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
