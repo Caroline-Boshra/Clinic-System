@@ -12,6 +12,8 @@ require_once __DIR__ . '/../layouts/header.php';
         </ol>
     </nav>
 
+    <?php showmessage(); ?>
+
     <?php if (empty($doctors)): ?>
         <div class="alert alert-info text-center mb-5" role="status">
             No doctors are available at the moment.
@@ -21,7 +23,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <?php foreach ($doctors as $doctor): ?>
                 <article class="card p-2" style="width: 18rem;">
                     <img
-                        src="<?= htmlspecialchars($basePath . $doctor['image'], ENT_QUOTES, 'UTF-8') ?>"
+                        src="<?= $basePath ?>assets/images/major.jpg"
                         class="card-img-top rounded-circle card-image-circle"
                         alt="<?= htmlspecialchars($doctor['name'], ENT_QUOTES, 'UTF-8') ?>"
                     >

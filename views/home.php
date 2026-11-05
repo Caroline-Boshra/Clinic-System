@@ -24,173 +24,57 @@ require_once __DIR__ . '/layouts/header.php';
             </div>
         </div>
         <div class="container">
-            <h2 class="h1 fw-bold text-center my-4">majors</h2>
+                        <h2 class="h1 fw-bold text-center my-4">Majors</h2>
             <div class="d-flex flex-wrap gap-4 justify-content-center">
-                <div class="card p-2" style="width: 18rem;">
-                    <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                        alt="major">
-                    <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                        <h4 class="card-title fw-bold text-center">Major title</h4>
-                        <a href="index.php?page=doctors" class="btn btn-outline-primary card-button">Browse Doctors</a>
-                    </div>
-                </div>
-                <div class="card p-2" style="width: 18rem;">
-                    <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                        alt="major">
-                    <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                        <h4 class="card-title fw-bold text-center">Major title</h4>
-                        <a href="index.php?page=doctors" class="btn btn-outline-primary card-button">Browse Doctors</a>
-                    </div>
-                </div>
-                <div class="card p-2" style="width: 18rem;">
-                    <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                        alt="major">
-                    <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                        <h4 class="card-title fw-bold text-center">Major title</h4>
-                        <a href="index.php?page=doctors" class="btn btn-outline-primary card-button">Browse Doctors</a>
-                    </div>
-                </div>
-                <div class="card p-2" style="width: 18rem;">
-                    <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                        alt="major">
-                    <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                        <h4 class="card-title fw-bold text-center">Major title</h4>
-                        <a href="index.php?page=doctors" class="btn btn-outline-primary card-button">Browse Doctors</a>
-                    </div>
-                </div>
-                <div class="card p-2" style="width: 18rem;">
-                    <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                        alt="major">
-                    <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                        <h4 class="card-title fw-bold text-center">Major title</h4>
-                        <a href="index.php?page=doctors" class="btn btn-outline-primary card-button">Browse Doctors</a>
-                    </div>
-                </div>
-                <div class="card p-2" style="width: 18rem;">
-                    <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                        alt="major">
-                    <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                        <h4 class="card-title fw-bold text-center">Major title</h4>
-                        <a href="index.php?page=doctors" class="btn btn-outline-primary card-button">Browse Doctors</a>
-                    </div>
-                </div>
-                <div class="card p-2" style="width: 18rem;">
-                    <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                        alt="major">
-                    <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                        <h4 class="card-title fw-bold text-center">Major title</h4>
-                        <a href="index.php?page=doctors" class="btn btn-outline-primary card-button">Browse Doctors</a>
-                    </div>
-                </div>
-                <div class="card p-2" style="width: 18rem;">
-                    <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                        alt="major">
-                    <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                        <h4 class="card-title fw-bold text-center">Major title</h4>
-                        <a href="index.php?page=doctors" class="btn btn-outline-primary card-button">Browse Doctors</a>
-                    </div>
-                </div>
+                <?php if (empty($majors)): ?>
+                    <p class="text-muted">No majors are available at the moment.</p>
+                <?php else: ?>
+                    <?php foreach ($majors as $major): ?>
+                        <div class="card p-2" style="width: 18rem;">
+                            <img src="<?= $basePath ?>assets/images/major.jpg"
+                                class="card-img-top rounded-circle card-image-circle"
+                                alt="<?= htmlspecialchars($major['name'], ENT_QUOTES, 'UTF-8') ?>">
+                            <div class="card-body d-flex flex-column gap-1 justify-content-center">
+                                <h4 class="card-title fw-bold text-center">
+                                    <?= htmlspecialchars($major['name'], ENT_QUOTES, 'UTF-8') ?>
+                                </h4>
+                                <a href="<?= $basePath ?>index.php?page=doctors"
+                                    class="btn btn-outline-primary card-button">Browse Doctors</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
-            <h2 class="h1 fw-bold text-center my-4">doctors</h2>
-            <section class="splide home__slider__doctors mb-5">
-                <div class="splide__track ">
+
+            <h2 class="h1 fw-bold text-center my-4">Doctors</h2>
+            <section class="splide home__slider__doctors mb-5" aria-label="Doctors">
+                <div class="splide__track">
                     <ul class="splide__list">
-                        <li class="splide__slide">
-                            <div class="card p-2" style="width: 18rem;">
-                                <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                                    alt="major">
-                                <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                                    <h4 class="card-title fw-bold text-center">Doctor Name</h4>
-                                    <h6 class="card-title fw-bold text-center">Major</h6>
-                                    <a href="index.php?page=doctor" class="btn btn-outline-primary card-button">Book an
-                                        appointment</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="card p-2" style="width: 18rem;">
-                                <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                                    alt="major">
-                                <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                                    <h4 class="card-title fw-bold text-center">Doctor Name</h4>
-                                    <h6 class="card-title fw-bold text-center">Major</h6>
-                                    <a href="index.php?page=doctor" class="btn btn-outline-primary card-button">Book an
-                                        appointment</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="card p-2" style="width: 18rem;">
-                                <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                                    alt="major">
-                                <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                                    <h4 class="card-title fw-bold text-center">Doctor Name</h4>
-                                    <h6 class="card-title fw-bold text-center">Major</h6>
-                                    <a href="index.php?page=doctors" class="btn btn-outline-primary card-button">Browse
-                                        Doctors</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="card p-2" style="width: 18rem;">
-                                <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                                    alt="major">
-                                <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                                    <h4 class="card-title fw-bold text-center">Doctor Name</h4>
-                                    <h6 class="card-title fw-bold text-center">Major</h6>
-                                    <a href="index.php?page=doctor" class="btn btn-outline-primary card-button">Book an
-                                        appointment</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="card p-2" style="width: 18rem;">
-                                <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                                    alt="major">
-                                <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                                    <h4 class="card-title fw-bold text-center">Doctor Name</h4>
-                                    <h6 class="card-title fw-bold text-center">Major</h6>
-                                    <a href="index.php?page=doctor" class="btn btn-outline-primary card-button">Book an
-                                        appointment</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="card p-2" style="width: 18rem;">
-                                <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                                    alt="major">
-                                <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                                    <h4 class="card-title fw-bold text-center">Doctor Name</h4>
-                                    <h6 class="card-title fw-bold text-center">Major</h6>
-                                    <a href="index.php?page=doctor" class="btn btn-outline-primary card-button">Book an
-                                        appointment</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="card p-2" style="width: 18rem;">
-                                <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                                    alt="major">
-                                <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                                    <h4 class="card-title fw-bold text-center">Doctor Name</h4>
-                                    <h6 class="card-title fw-bold text-center">Major</h6>
-                                    <a href="index.php?page=doctor" class="btn btn-outline-primary card-button">Book an
-                                        appointment</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="card p-2" style="width: 18rem;">
-                                <img src="<?= $basePath ?>assets/images/major.jpg" class="card-img-top rounded-circle card-image-circle"
-                                    alt="major">
-                                <div class="card-body d-flex flex-column gap-1 justify-content-center">
-                                    <h4 class="card-title fw-bold text-center">Doctor Name</h4>
-                                    <h6 class="card-title fw-bold text-center">Major</h6>
-                                    <a href="index.php?page=doctor" class="btn btn-outline-primary card-button">Book an
-                                        appointment</a>
-                                </div>
-                            </div>
-                        </li>
+                        <?php if (empty($doctors)): ?>
+                            <li class="splide__slide">
+                                <div class="alert alert-info">No doctors are available at the moment.</div>
+                            </li>
+                        <?php else: ?>
+                            <?php foreach ($doctors as $doctor): ?>
+                                <li class="splide__slide">
+                                    <div class="card p-2" style="width: 18rem;">
+                                        <img src="<?= $basePath ?>assets/images/major.jpg"
+                                            class="card-img-top rounded-circle card-image-circle"
+                                            alt="<?= htmlspecialchars($doctor['name'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <div class="card-body d-flex flex-column gap-1 justify-content-center">
+                                            <h4 class="card-title fw-bold text-center">
+                                                <?= htmlspecialchars($doctor['name'], ENT_QUOTES, 'UTF-8') ?>
+                                            </h4>
+                                            <h6 class="card-title fw-bold text-center">
+                                                <?= htmlspecialchars($doctor['major'], ENT_QUOTES, 'UTF-8') ?>
+                                            </h6>
+                                            <a href="<?= $basePath ?>index.php?page=doctor"
+                                                class="btn btn-outline-primary card-button">Book an appointment</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </section>

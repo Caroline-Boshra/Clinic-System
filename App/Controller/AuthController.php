@@ -90,16 +90,16 @@ class AuthController
             'email' => $user->email,
             'role' => $user->role,
         ];
-        if ($user->role === 'admin') {
-        header("Location: index.php?page=admin-dashboard");
-        } elseif ($user->role === 'doctor') {
-        header("Location: index.php?page=doctor-dashboard");
-        } else {
-            header("Location: index.php?page=home");
-        }  
-
         setmessage("Welcome back, " . htmlspecialchars($user->name), "success");
-        header("Location: index.php?page=home");
+        if ($user->role === 'admin') {
+            $redirect = 'index.php?page=home';
+        } elseif ($user->role === 'doctor') {
+            $redirect = 'index.php?page=doctor-dashboard';
+        } else {
+            $redirect = 'index.php?page=home';
+        }
+
+        header("Location: {$redirect}");
         exit;
     }
 /////////////////////////////////////////
