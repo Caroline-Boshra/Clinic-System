@@ -1,6 +1,7 @@
 <?php
 
 use App\Database;
+use App\Controller\AdminConroller;
 use App\Controller\AuthController;
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -27,24 +28,42 @@ switch ($page) {
         break;
 
     case 'majors':
+        $majors = (new AdminConroller($pdo))->getMajors();
         require __DIR__ . '/views/majors.php';
         break;
 
     case 'doctors':
+        $doctors = (new AdminConroller($pdo))->getDoctors();
         require __DIR__ . '/views/doctors/index.php';
         break;
 
     case 'doctor':
+        if (empty($_SESSION['user'])) {
+            setmessage('Please login first', 'danger');
+            header('Location: index.php?page=login');
+            exit;
+        }
+
         require __DIR__ . '/views/doctors/doctor.php';
         break;
 
     case 'add-doctor':
+        $majors = (new AdminConroller($pdo))->getMajors();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            (new AdminConroller($pdo))->addDoctor();
+            exit;
+        }
         require __DIR__ . '/views/admin/add-doctor.php';
         break;
 
     case 'add-major':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            (new AdminConroller($pdo))->addMajor();
+            exit;
+        }
         require __DIR__ . '/views/admin/add-major.php';
         break;
+  
 
     case 'login':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -69,6 +88,9 @@ switch ($page) {
         exit;
 
     case 'home':
+        $adminController = new AdminConroller($pdo);
+        $majors = $adminController->getMajors();
+        $doctors = $adminController->getDoctors();
         require __DIR__ . '/views/home.php';
         break;
 
@@ -77,7 +99,13 @@ switch ($page) {
     break;
 
 case 'doctor-dashboard':
-    // Doctor Dashboard
+    if (empty($_SESSION['user']) || $_SESSION['user']['role'] !== 'doctor') {
+        setmessage('You must be logged in as a doctor.', 'danger');
+        header('Location: index.php?page=login');
+        exit;
+    }
+
+    require __DIR__ . '/views/doctors/doctor-dashboard.php';
     break;
 
     default:

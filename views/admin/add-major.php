@@ -1,6 +1,4 @@
 <?php
-$basePath = '';
-$pageTitle = 'Add Major';
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
@@ -15,8 +13,9 @@ require_once __DIR__ . '/../layouts/header.php';
     </nav>
 
     <section class="admin-form mx-auto admin-form--compact">
+        <?php showmessage('error'); ?>
+
         <div class="admin-form__header">
-            <span class="admin-form__icon" aria-hidden="true">+</span>
             <div>
                 <h1 class="h3 fw-bold mb-1">Add Major</h1>
                 <p class="text-muted mb-0">Create a new medical major</p>
@@ -24,21 +23,17 @@ require_once __DIR__ . '/../layouts/header.php';
         </div>
 
         <form class="form" action="<?= $basePath ?>index.php?page=add-major" method="POST">
-            <div class="form-items">
+            <div class="form-item--full">
                 <div class="mb-3">
                     <label class="form-label required-label" for="major-name">Major name</label>
                     <input type="text" class="form-control" id="major-name" name="name"
-                        placeholder="required" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="major-image">Image URL</label>
-                    <input type="url" class="form-control" id="major-image" name="image"
-                        placeholder="https://example.com/major.jpg">
+                        value="<?= htmlspecialchars($old['name'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                        placeholder="required" >
                 </div>
                 <div class="mb-3 form-item--full">
                     <label class="form-label" for="major-description">Description</label>
                     <textarea class="form-control" id="major-description" name="description" rows="5"
-                        placeholder="Description"></textarea>
+                        placeholder="Description"><?= htmlspecialchars($old['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
                 </div>
             </div>
             <div class="admin-form__actions">

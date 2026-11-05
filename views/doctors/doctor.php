@@ -1,6 +1,4 @@
 <?php
-$basePath = '';
-$pageTitle = 'Book an Appointment';
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
