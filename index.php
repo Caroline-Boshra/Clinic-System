@@ -38,6 +38,12 @@ switch ($page) {
         break;
 
     case 'doctor':
+        if (empty($_SESSION['user'])) {
+            setmessage('Please login first', 'danger');
+            header('Location: index.php?page=login');
+            exit;
+        }
+
         require __DIR__ . '/views/doctors/doctor.php';
         break;
 
