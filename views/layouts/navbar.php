@@ -1,3 +1,6 @@
+<?php 
+// var_dump($_SESSION['user']['role'] ?? null); 
+?>
 <nav class="navbar navbar-expand-lg bg-blue sticky-top py-2">
     <div class="container">
         <div class="navbar-brand">
@@ -13,21 +16,40 @@
             <div class="d-flex gap-3 flex-wrap justify-content-center" role="group">
                 <a class="btn btn-outline-light navigation--button"
                     href="<?= $basePath ?>index.php?page=home">Home</a>
-                <?php if (!empty($_SESSION['user'])): ?>
+                
+                <?php $role = $_SESSION['user']['role'] ?? null; ?>
+
+                <?php if (in_array($role, ['admin', 'patient'], true)): ?>
                     <a class="btn btn-outline-light navigation--button"
                         href="<?= $basePath ?>index.php?page=majors">Majors</a>
                     <a class="btn btn-outline-light navigation--button"
                         href="<?= $basePath ?>index.php?page=doctors">Doctors</a>
                 <?php endif; ?>
-                <a class="btn btn-outline-light navigation--button"
-                    href="<?= $basePath ?>index.php?page=contact">Contact</a>
+
+                <?php if ($role === 'patient'): ?>
+                    <a class="btn btn-outline-light navigation--button"
+                        href="<?= $basePath ?>index.php?page=contact">Contact</a>
+                <?php endif; ?>
+
                 <?php if (!empty($_SESSION['user'])): ?>
                     <?php if (($_SESSION['user']['role'] ?? null) === 'admin'): ?>
                         <a class="btn btn-outline-light navigation--button"
                             href="<?= $basePath ?>index.php?page=add-doctor">Add Doctor</a>
                         <a class="btn btn-outline-light navigation--button"
                             href="<?= $basePath ?>index.php?page=add-major">Add Major</a>
+                        <a class="btn btn-outline-light navigation--button"
+                            href="<?= $basePath ?>index.php?page=all_messages">All Messages</a>
+                    <?php elseif (($_SESSION['user']['role'] ?? null) === 'doctor'): ?>
+                        <a class="btn btn-outline-light navigation--button"
+                            href="<?= $basePath ?>index.php?page=create_shift">Add Shift</a>
+                        <a class="btn btn-outline-light navigation--button"
+                            href="<?= $basePath ?>index.php?page=shifts">My Shifts</a>
+                        <a class="btn btn-outline-light navigation--button"
+                            href="<?= $basePath ?>index.php?page=doctor_pricing">Add Pricing</a>
+                        <a class="btn btn-outline-light navigation--button"
+                            href="<?= $basePath ?>index.php?page=bookings">All Bookings</a>
                     <?php endif; ?>
+                    
                     <a class="btn btn-outline-light navigation--button"
                         href="<?= $basePath ?>index.php?page=logout">Logout</a>
                 <?php else: ?>

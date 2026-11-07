@@ -170,5 +170,16 @@ class AdminConroller
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
    
-
+    public function all_messages(): array
+    {
+        if (($_SESSION['user']['role'] ?? null) !== 'admin') {
+            setmessage('You must be logged in as an admin.', 'danger');
+            header('Location: index.php?page=login');
+            exit;
+        }
+        $statement = $this->pdo->query('SELECT * FROM contact_us ORDER BY id DESC');
+        $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+        require_once __DIR__ . '/../../views/admin/all_messages.php';
+        return $messages;
+    }
 }
