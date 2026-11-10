@@ -1,7 +1,9 @@
 <?php
+use Clinic\{Database,Auth};
 
-  require_once __DIR__ . '/core/functions.php';
-  logout();
-  header("location:register.php");
-  exit;
-?>
+$auth  = new Auth($users);         
+ 
+
+$auth->logout();
+header('Location: register.php');
+exit;
